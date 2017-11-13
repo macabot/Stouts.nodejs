@@ -1,3 +1,10 @@
 ---
 
-# Still not implemented
+- name: Ensure that nodejs directory is exist
+  file: path={{nodejs_home}}/bin state=directory mode=0755
+
+- name: Download nodejs bin
+  get_url: url={{nodejs_bin_url}} dest={{nodejs_home}}/bin/v{{nodejs_version}}.tar.gz
+
+- name: Unpack nodejs
+  unarchive: src={{nodejs_home}}/bin/v{{nodejs_version}}.tar.gz dest={{nodejs_home}}/bin copy=no creates={{nodejs_home}}/bin/node-v{{nodejs_version}}
