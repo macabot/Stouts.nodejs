@@ -9,6 +9,9 @@
 - include: install.src.yml
   when: nodejs_install == 'src'
 
+- include: install.bin.yml
+  when: nodejs_install == 'bin'
+
 - name: Install NPM modules
   npm: name={{item}} global=yes
   with_items: "{{nodejs_npm_modules}}"
